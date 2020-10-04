@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node-depl
+  namespace: default
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      app: node 
+  template:
+    metadata:
+      labels:
+        app: node 
+    spec:
+      containers:
+        - name: node
+          image: nodejs:latest 995054106418.dkr.ecr.us-east-2.amazonaws.com/nodejs:latest
+          ports:
+            - containerPort: 3000
+          resources:
+            requests:
+              cpu: 200m
+            limits:
+              cpu: 500m
+      priorityClassName: high-priority    # priority set to 1000000
